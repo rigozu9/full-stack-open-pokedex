@@ -1,0 +1,1 @@
+"eslint": "eslint './**/*.{js,jsx}'",
