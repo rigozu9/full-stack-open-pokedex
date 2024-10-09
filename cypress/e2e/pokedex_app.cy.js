@@ -6,9 +6,10 @@ describe('Pokedex', function() {
     cy.contains('Pokémon and Pokémon character names are trademarks of Nintendo.')
   })
   it('navigate from the main page to the page of a particular Pokemon', function() {
-    cy.visit('http://localhost:5000/charizard')
+    cy.visit('http://localhost:5000')
+    cy.contains('charizard').click()
     cy.contains('charizard')
-    cy.contains('speed')
     cy.contains('solar power')
+    cy.contains('blaze')
   })
 })
