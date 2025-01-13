@@ -21,7 +21,7 @@ const App = () => {
   }
   if (error) {
     return <ErrorMessage error={error} />
-  }
+
 
   let next = null
   let previous = null
