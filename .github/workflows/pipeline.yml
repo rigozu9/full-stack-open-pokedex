@@ -48,10 +48,10 @@ jobs:
         - name: Discord Webhook Notify for deployment
           uses: rjstone/discord-webhook-notify@v1.0.4
           if: ${{ success() }}
-            with:
-              severity: info
-              details: Deployment Succeeded!
-              webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          with:
+            severity: info
+            details: Deployment Succeeded!
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
             
     tag_release:
       needs: [simple_deployment_pipeline]
