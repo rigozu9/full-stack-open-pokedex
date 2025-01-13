@@ -21,4 +21,11 @@ jobs:
       - name: commit messages
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES"
+        run: echo join(github.event.issue.labels.*.name, ', ')
+      - name: condition testing
+        env:
+          CONDITION: ${{ contains('skip this tag', 'skip') }}
+        run: echo "Condition is $CONDITION"
+      - name: test "#skip" in commit messages
+        if: ${{ contains(toJson(github.event.commits.*.message), '#skip') }}
+        run: echo "This step is executed because '#skip' is found in commit messages."
