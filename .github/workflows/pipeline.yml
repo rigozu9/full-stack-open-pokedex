@@ -48,7 +48,7 @@ jobs:
           if: ${{ success() }}
           with:
             severity: info
-            details: Deployment Succeeded!
+            details: Deployment Succeeded!!
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
             
     tag_release:
