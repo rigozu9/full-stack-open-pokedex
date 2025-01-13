@@ -3,6 +3,8 @@ name: Deployment pipeline
 env: 
   SKIP_CONDITION: ${{ contains(toJson(github.event.commits.*.message), '#skip') }} 
 
+webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
 on:
   push:
     branches:
@@ -25,6 +27,13 @@ jobs:
           run: npm run eslint -- --env jest
         - name: build
           run: npm run build
+        - name: Discord Webhook Notify for build
+          uses: rjstone/discord-webhook-notify@v1.0.4
+          if: ${{ failure() }}
+            with:
+              severity: error
+              details: Build Failed!
+              webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}   
         - name: test
           run: npm test
         - name: e2e tests
@@ -36,6 +45,14 @@ jobs:
         - name: Trigger deployment
           if: ${{ github.event_name == 'push' && env.SKIP_CONDITION != 'true'}}
           run: curl ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        - name: Discord Webhook Notify for deployment
+          uses: rjstone/discord-webhook-notify@v1.0.4
+          if: ${{ success() }}
+            with:
+              severity: info
+              details: Deployment Succeeded!
+              webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+            
     tag_release:
       needs: [simple_deployment_pipeline]
       runs-on: ubuntu-20.04
