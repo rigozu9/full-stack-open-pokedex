@@ -30,10 +30,10 @@ jobs:
         - name: Discord Webhook Notify for build
           uses: rjstone/discord-webhook-notify@v1.0.4
           if: ${{ failure() }}
-            with:
-              severity: error
-              details: Build Failed!
-              webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}   
+          with:
+            severity: error
+            details: Build Failed!
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
         - name: test
           run: npm test
         - name: e2e tests
