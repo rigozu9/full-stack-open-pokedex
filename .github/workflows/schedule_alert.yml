@@ -10,7 +10,7 @@ on:
     types: [opened, synchronize]
   schedule:
     # Run the health check every hour
-    - cron: "0 0 * * *"
+    - cron: "0 * * * *"
 
 jobs:
   simple_deployment_pipeline:
