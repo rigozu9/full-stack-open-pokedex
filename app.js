@@ -11,7 +11,7 @@ app.get('/version', (req, res) => {
 })
 
 app.get('/health', (req, res) => {
-  res.status(500).send('Health check failed intentionally')
+  res.send('ok')
 })
 
 app.listen(PORT, () => {
